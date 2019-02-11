@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/bootstrap-table.css" media="screen">
+    <style type="text/css">
+    .m15{ margin: 15px;}
+     .tc{ text-align: center;font-size: 18px;font-weight: 600;}
+    </style>
+    <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap-table.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="leftMenu" class="col-md-2 hidden">
+                <ul id="main-nav" class="main-nav nav nav-tabs nav-stacked" style="">
+                    <li>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-th-large"></i>
+                            首页      
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#systemSetting" class="nav-header collapsed" data-toggle="collapse">
+                            <i class="glyphicon glyphicon-cog"></i>
+                            系统管理
+                            
+                            <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+                        </a>
+                        <ul id="systemSetting" class="nav nav-list secondmenu collapse" style="height: 0px;">
+                            <li><a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;用户管理</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-th-list"></i>&nbsp;菜单管理</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-asterisk"></i>&nbsp;角色管理</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-edit"></i>&nbsp;修改密码</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;日志查看</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#configSetting" class="nav-header collapsed" data-toggle="collapse">
+                            <i class="glyphicon glyphicon-credit-card"></i>
+                            配置管理    
+                                   <span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
+                        </a>
+                        <ul id="configSetting" class="nav nav-list secondmenu collapse in">
+                            <li class="active"><a href="#"><i class="glyphicon glyphicon-globe"></i>&nbsp;全局缺省配置</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-star-empty"></i>&nbsp;未开通用户配置</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-star"></i>&nbsp;退订用户配置</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-text-width"></i>&nbsp;试用用户配置</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;开通用户配置</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#disSetting" class="nav-header collapsed" data-toggle="collapse">
+                            <i class="glyphicon glyphicon-globe"></i>
+                            分发配置
+                             <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+                        </a>
+                        <ul id="disSetting" class="nav nav-list secondmenu collapse">
+                            <li><a href="#"><i class="glyphicon glyphicon-th-list"></i>&nbsp;分发包配置</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#dicSetting" class="nav-header collapsed" data-toggle="collapse">
+                            <i class="glyphicon glyphicon-bold"></i>
+                            字典配置
+                            <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+                        </a>
+                        <ul id="dicSetting" class="nav nav-list secondmenu collapse">
+                            <li><a href="#"><i class="glyphicon glyphicon-text-width"></i>&nbsp;关键字配置</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-fire"></i>
+                            关于系统
+                            <span class="badge pull-right">1</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-md-10">
+                 <div >
+                    <form class="form-horizontal" role="form">
+                    <fieldset>
+                        <legend>查询条件</legend>
+                       <div class="form-group">
+                          <label class="col-sm-2 control-label" for="ds_host">姓名</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="s_name" type="text" placeholder="张三"/>
+                          </div>
+                          <label class="col-sm-2 control-label" for="ds_name">年龄</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="s_age" type="text" placeholder="18"/>
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label class="col-sm-2 control-label" for="ds_username">用户名</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_username" type="text" placeholder="root"/>
+                          </div>
+                          <label class="col-sm-2 control-label" for="ds_password">密码</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_password" type="password" placeholder="123456"/>
+                          </div>
+                       </div>
+                       <div class="form-group">                          
+                          <div class="col-sm-4 col-sm-offset-4">
+                             <button type="button" id="btnQuery" class="btn btn-primary btn-sm">查询 </button>
+                             <button type="button" id="btnQueryBoots" class="btn btn-primary btn-sm">查询Boots </button>
+                             <button type="button" id="btnReset" class="btn btn-primary btn-sm">重置 </button>
+                          </div>
+                       </div>
+                    </fieldset>                        
+                    </form>
+                    <table id='tabUsers'></table>
+        
+        <!--
+        <div class="container">
+            
+            <form  class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post" onsubmit="return false">
+                
+                <div class="col-sm-2 ea-search-sel-ct">
+                    <label class="control-label col-sm-1" for="s_name">姓名：</label>
+                    <input type="text" id="s_name" name="s_name" value="<%= datas.name %>">
+                    <label class="control-label col-sm-1" for="s_age">年龄：</label>
+                    <input type="text" id="s_age" name="s_age" value="<%= datas.age %>">
+                </div>
+                <div class="container">                    
+                        <button type="button" id="btnQuery" class="btn btn-primary">查询 </button>
+                        <button type="button" id="btnQueryBoots" class="btn btn-primary">查询Boots </button>                  
+                        <button type="button" id="btn_reset" class="btn btn-primary">重置 </button>
+                </div>
+            </form>
+         
+        <div class="row">
+            <div class="col-sm-12 col-lg-12 col-md-12">
+                <label class="control-label" for="s_name">姓名：</label>
+                <input calss="form-control" type="text" id="s_name" name="s_name" value="<%= datas.name %>">
+                <label class="control-label" for="s_age">年龄：</label>
+                <input calss="form-control" type="text" id="s_age" name="s_age" value="<%= datas.age %>">
+            </div>
+            
+        </div>
+        <div class="row">
+                <div class="col-sm-12 col-lg-4 col-md-12"></div>
+                <div class="col-sm-12 col-lg-4 col-md-12">
+                    <button type="button" id="btnQuery" class="btn btn-primary">查询 </button>
+                    <button type="button" id="btnQueryBoots" class="btn btn-primary">查询Boots </button>                  
+                    <button type="button" id="btn_reset" class="btn btn-primary">重置 </button>
+                </div>
+                <div class="col-sm-12 col-lg-4 col-md-12"></div>
+        </div>
+        </div>
+            </div>
+        </div>
+    </div>
+
+   
+    -->
+            <!--<table>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>操作</th>
+                </tr>
+                <% for(var i = 0; i < datas.length; i++) {%>
+                    <tr>
+                        <td><%= datas[i].id %></td>
+                        <td><%= datas[i].age %></td>
+                        <td><%= datas[i].name %></td>
+                        <td><a href="/users/add">添加用户</a></td>
+                        <td><a href="/users/del/<%= datas[i].id %>">删除</a></td>
+                        <td><a href="/users/toUpdate/<%= datas[i].id %>">修改</a></td>
+                    </tr>
+                <% } %>
+            </table>-->
+    <!--新增用户模态窗口-->
+    <!-- 新增用户的模态框，在修改用户中将获取一行的值放入input中，改变一些参数继续使用 -->
+        <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>新增用户</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addUserForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="s_id" class="col-sm-2 control-label">ID</label>
+                                <div class="col-sm-7">
+                                    <input type="account" name="s_id" class="form-control" id="s_id" placeholder="ID"/>
+                                </div>
+                                <label id="errorAccount" for="inputAccount" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group" >
+                                <label for="s_name" class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="s_name" class="form-control" id="s_name" placeholder="密码"/>
+                                </div>
+                                <label id="errorPassword" for="s_name" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="s_age" class="col-sm-2 control-label">年龄</label>
+                                <div class="col-sm-7">
+                                    <input type="name" name="s_age" class="col-sm-4 form-control" id="s_age" placeholder="年龄"/>
+                                </div>
+                                <label id="errorName" for="s_age" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputSex" class="col-sm-2 control-label">性别</label>
+                                <div class="col-sm-7">
+                                    <input type="sex" name="sex" class="col-sm-4 form-control" id="inputSex" placeholder="性别"/>
+                                </div>
+                                <label id="errorSex" for="inputSex" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPhone" class="col-sm-2 control-label">手机</label>
+                                <div class="col-sm-7">
+                                    <input type="phone" name="phone" class="col-sm-4 form-control" id="inputPhone" placeholder="手机"/>
+                                </div>
+                                <label id="errorPhone" for="inputPhone" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
+                                <div class="col-sm-7">
+                                    <input type="email" name="email" class="col-sm-4 form-control" id="inputEmail" placeholder="邮箱"/>
+                                </div>
+                                <label id="errorEmail" for="inputEmail" class="col-sm-3 control-label"></label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="conf" class="btn btn-default" onclick="addUser()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="resetAddModal()">取消</button>
+                    </div>
+                </div>              
+            </div>
+        </div>
+        <!--用户修改模态窗口-->
+        <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>修改用户</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form id="updateUserForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="se_id" class="col-sm-2 control-label">ID</label>
+                                <div class="col-sm-7">
+                                    <input type="account" name="s_id" class="form-control" id="se_id" placeholder="ID"/>
+                                </div>
+                                <label id="errorAccount" for="inputAccount" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group" >
+                                <label for="se_name" class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="s_name" class="form-control" id="se_name" placeholder="密码"/>
+                                </div>
+                                <label id="errorPassword" for="s_name" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="se_age" class="col-sm-2 control-label">年龄</label>
+                                <div class="col-sm-7">
+                                    <input type="name" name="s_age" class="col-sm-4 form-control" id="se_age" placeholder="年龄"/>
+                                </div>
+                                <label id="errorName" for="s_age" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputSex" class="col-sm-2 control-label">性别</label>
+                                <div class="col-sm-7">
+                                    <input type="sex" name="sex" class="col-sm-4 form-control" id="inputSex" placeholder="性别"/>
+                                </div>
+                                <label id="errorSex" for="inputSex" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPhone" class="col-sm-2 control-label">手机</label>
+                                <div class="col-sm-7">
+                                    <input type="phone" name="phone" class="col-sm-4 form-control" id="inputPhone" placeholder="手机"/>
+                                </div>
+                                <label id="errorPhone" for="inputPhone" class="col-sm-3 control-label"></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
+                                <div class="col-sm-7">
+                                    <input type="email" name="email" class="col-sm-4 form-control" id="inputEmail" placeholder="邮箱"/>
+                                </div>
+                                <label id="errorEmail" for="inputEmail" class="col-sm-3 control-label"></label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="conf" class="btn btn-default" onclick="updateUser()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="resetAddModal()">取消</button>
+                    </div>
+                </div>              
+            </div>
+        </div>
+ 
+        <!--表格工具栏-->    
+        <div id="toolbar" class="btn-group">
+            <button id="btn_add_out" type="button" class="btn btn-default" data-toggle="modal" data-target="#addUserModal">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_edit_out" type="button" class="btn btn-default" onclick="updateUserModal()">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+            </button>
+            <button id="btn_delete" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+         </div>
+
+        
+        
+    </div>
+        </div>
+    </div>
+
+<script type="text/javascript" >
+    // $('#btnQuery').click(function(){
+        
+    //     var s_name=$("#s_name").val();
+    //     var s_age=$("#s_age").val();
+    //     var pars={s_name:s_name,s_age:s_age};
+    //      $.ajax({ 
+    //             url:'/usersJ',
+    //             type:'post',
+    //             data: pars,
+    //             dataType: 'json',
+    //             success: function(data,status){ 
+    //                 if(status == 'success'){ 
+
+    //                 }
+    //             },
+    //             error: function(data,status){ 
+    //                 if(status == 'error'){ 
+    //                     location.href = 'login';
+    //                 }
+    //             }
+    //         });
+    // });
+    $('#btnQuery2').click(function(){
+        alert("我是有效果的");
+    });
+    $('#btnQueryBoots').click(function(){
+        $("#tabUsers").bootstrapTable('refresh');
+    });
+    $('#btn_delete').click(function(){
+        alert("我是有效果的");
+        //oTable.delUsers();
+        delUsers();
+    });
+     //添加
+     $("#btn_add").click(addUser);
+
+
+$(function () {
+
+    //1.初始化Table
+    var oTable = new TableInit();
+    oTable.Init();
+
+    //2.初始化Button的点击事件
+    var oButtonInit = new ButtonInit();
+    oButtonInit.Init();
+
+});
+
+var TableInit = function () {
+    var oTableInit = new Object();
+    //初始化Table
+    oTableInit.Init = function () {
+        $("#tabUsers").bootstrapTable({
+            url: '/users',                      //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            queryParams: oTableInit.queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber:1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: true,
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: true,                //是否启用点击选中行
+            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+            showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'id',
+                title: 'ID'
+            }, {
+                field: 'name',
+                title: '姓名'
+            }, {
+                field: 'aget',
+                title: '年龄'
+            },  ]
+        });
+    };
+
+    //得到查询的参数
+    oTableInit.queryParams = function (params) {
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            limit: params.limit,   //页面大小
+            offset: params.offset,  //页码
+            s_name: $("#s_name").val(),
+            s_age: $("#s_age").val()
+        };
+        return temp;
+    };
+
+    //删除数据
+    oTableInit.delUsers=function(){
+        var rows=$("tabUsers").bootstrapTable('getSelections');
+        if (rows.length==0){
+            alert("请选择要删除的记录");
+            return;
+        }
+        var ids="";
+        for (var i=0;i<rows.length;i++){
+            ids+=rows[i]['id']+",";
+        }
+        ids=ids.substring(0,ids.length-1);
+
+        $.ajax({
+            url:"/delUsers",
+            type:"post",
+            data:{ids:ids},
+            success:function(){
+                $("#tabUsers").bootstrapTable('refresh');
+            }
+        });
+    };
+
+    return oTableInit;
+};
+
+
+var ButtonInit = function () {
+    var oInit = new Object();
+    var postdata = {};
+
+    oInit.Init = function () {
+        //初始化页面上面的按钮事件
+    };
+
+    return oInit;
+};    
+//用户编辑modal传参
+function updateUserModal(){
+    //$("#addUserModal").modal('show');
+    debugger;
+    var rows=$("#tabUsers").bootstrapTable("getSelections");
+    if(rows.length!=1) {
+        alert("请选择1条记录");
+        //$("#updateUserModal").modal('hide');
+        return;
+    };
+    var row=rows[0];
+    $("#se_id").val(row.id);
+    $("#se_name").val(row.name);
+    $("#se_age").val(row.aget);
+    $("#updateUserModal").modal("show");
+};
+
+function addUser(){
+        //序列化表单元素（类似 .serialize() 方法），返回 JSON 数据结构数据
+        var param = $("#addUserForm").serializeArray();
+        debugger;
+        // $("#conf").attr("onclick","addUser()");
+        $.ajax({
+            url:"/users_Adduser",
+            method:"post",
+            data:param,
+            dataType:"json",
+            success:function(data){
+                if(data.dbret=="success"){
+                    //document.getElementById("al").innerText="新增成功";
+                    //$("#addEnd").modal('show');
+                    $("#addUserModal").modal('hide');
+                    $("#tabUsers").bootstrapTable('refresh');
+                }
+            },
+            error:function(){
+                //document.getElementById("al").innerText="新增失败";
+                //$("#addEnd").modal('show');
+                alert("新增失败");
+            }
+        });
+        // $("#addEnd").modal('show');
+        // $("#addUserModal").modal('hide');
+        // $("#dataGrid").bootstrapTable('refresh');
+    };
+
+ 
+var delUsers = function () {
+        var rows=$("#tabUsers").bootstrapTable('getSelections');
+        if (rows.length==0){
+            alert("请选择要删除的记录");
+            return;
+        }
+        var ids="";
+        for (var i=0;i<rows.length;i++){
+            ids+=rows[i]['id']+",";
+        }
+        ids=ids.substring(0,ids.length-1);
+
+        $.ajax({
+            url:"/delUsers",
+            type:"post",
+            data:{ids:ids},
+            success:function(){
+                $("#tabUsers").bootstrapTable('refresh');
+            }
+        });
+    };
+
+</script>
+</body>
+</html>
